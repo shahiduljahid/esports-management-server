@@ -1,0 +1,21 @@
+{
+  "name": "esports-management-server",
+  "version": "1.0.0",
+  "description": "it's a server side  for esports ground website",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon index",
+    "start": "nodemon index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "shahidul islam jahid",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.9.0",
+    "nodemon": "^2.0.20"
+  }
+}
