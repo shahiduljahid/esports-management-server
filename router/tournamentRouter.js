@@ -13,6 +13,17 @@ router.get('/', async (req, res) => {
   }
 })
 
+//get User Tournament by userId
+router.get('/singleUserTournament/:id', async (req, res) => {
+  const userId = req.params.id
+  try {
+    const docs = await Tournament.find({ creator: userId })
+    res.json(docs)
+  } catch {
+    res.json({ error: 'unknown error' })
+  }
+})
+
 //get Tournament by Tournament id
 router.get('/TournamentById/:id', async (req, res) => {
   try {
@@ -53,6 +64,7 @@ router.patch('/TournamentDetails/:id', async (req, res) => {
         tourLogo: body.tourLogo,
         tournament_Title: body.tournament_Title,
         org_name: body.org_name,
+        creator: body.creator,
       },
     )
 
@@ -67,18 +79,15 @@ router.patch('/TournamentDetails/:id', async (req, res) => {
 
 //delete Tournament by Id
 
-router.delete("/:id", async (req, res) => {
-    try {
-      const data = await Tournament.findByIdAndDelete({
-        _id: req.params.id,
-      });
-      res.send(data);
-    } catch {
-      res.send("Wrong parameter detected");
-    }
-  });
-
-
-
+router.delete('/:id', async (req, res) => {
+  try {
+    const data = await Tournament.findByIdAndDelete({
+      _id: req.params.id,
+    })
+    res.send(data)
+  } catch {
+    res.send('Wrong parameter detected')
+  }
+})
 
 module.exports = router

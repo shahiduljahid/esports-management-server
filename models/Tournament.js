@@ -7,6 +7,7 @@ const TournamentSchema = mongoose.Schema(
     tourLogo: String,
     tournament_Title: String,
     org_Name: String,
+    creator: String,
   },
   {
     timestamps: true,
