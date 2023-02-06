@@ -41,7 +41,7 @@ router.post('/', async (req, res) => {
     const result = await newData.save()
 
     if (result) {
-      const doc = await Tournament.find()
+      const doc = await Tournament.find({})
       res.json(doc)
     }
   } catch (error) {
@@ -63,19 +63,46 @@ router.patch('/TournamentDetails/:id', async (req, res) => {
         orgLogo: body.orgLogo,
         tourLogo: body.tourLogo,
         tournament_Title: body.tournament_Title,
-        org_name: body.org_name,
+        org_Name: body.org_Name,
         creator: body.creator,
       },
     )
 
     if (stats) {
-      const Tournament = await Tournament.findOne({ _id: req.params.id })
-      res.json(Tournament)
+      const docs = await Tournament.find()
+      res.json(docs)
     }
   } catch (err) {
     res.json({ error: err })
   }
 })
+
+
+router.post("/deleteTournament", async (req, res) => {
+  const ids = req.body;
+  try {
+    const result = await Tournament.deleteMany({ _id: { $in: ids } });
+    if (result) {
+      const documents = await Tournament.find();
+      res.json(documents);
+    }
+  } catch {
+    res.json({ err: "delete failed" });
+  }
+});
+
+router.post("/deleteOneCheckList", async (req, res) => {
+  const ids = req.body;
+
+  try {
+    const result = await Tournament.deleteMany({ _id: { $in: ids } });
+    if (result) {
+      res.send(true);
+    }
+  } catch {
+    res.json({ err: "delete failed" });
+  }
+});
 
 //delete Tournament by Id
 
