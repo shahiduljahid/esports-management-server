@@ -26,9 +26,11 @@ router.get('/singleUserTournament/:id', async (req, res) => {
 
 //get Tournament by Tournament id
 router.get('/TournamentById/:id', async (req, res) => {
+  console.log(req.params.id)
   try {
-    const Tournament = await Tournament.findOne({ _id: req.params.id })
-    res.json(Tournament)
+    const docs = await Tournament.findOne({ _id: req.params.id })
+    console.log(docs)
+    res.json(docs)
   } catch (err) {
     res.json({ error: 'Tournament not found' })
   }
@@ -65,6 +67,7 @@ router.patch('/TournamentDetails/:id', async (req, res) => {
         tournament_Title: body.tournament_Title,
         org_Name: body.org_Name,
         creator: body.creator,
+        roadMap: body.roadMap,
       },
     )
 
@@ -77,32 +80,18 @@ router.patch('/TournamentDetails/:id', async (req, res) => {
   }
 })
 
-
-router.post("/deleteTournament", async (req, res) => {
-  const ids = req.body;
+router.post('/deleteTournament', async (req, res) => {
+  const ids = req.body
   try {
-    const result = await Tournament.deleteMany({ _id: { $in: ids } });
+    const result = await Tournament.deleteMany({ _id: { $in: ids } })
     if (result) {
-      const documents = await Tournament.find();
-      res.json(documents);
+      const documents = await Tournament.find()
+      res.json(documents)
     }
   } catch {
-    res.json({ err: "delete failed" });
+    res.json({ err: 'delete failed' })
   }
-});
-
-router.post("/deleteOneCheckList", async (req, res) => {
-  const ids = req.body;
-
-  try {
-    const result = await Tournament.deleteMany({ _id: { $in: ids } });
-    if (result) {
-      res.send(true);
-    }
-  } catch {
-    res.json({ err: "delete failed" });
-  }
-});
+})
 
 //delete Tournament by Id
 
