@@ -8,7 +8,8 @@ const TournamentSchema = mongoose.Schema(
     tournament_Title: String,
     org_Name: String,
     creator: String,
-    roadMap:Array
+    roadMap:Array,
+    teams:Array,
   },
   {
     timestamps: true,

@@ -41,18 +41,8 @@ router.patch("/addSignature/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   console.log(req.body);
   const userData = { ...req.body };
-  const allUser = await User.find();
-  console.log(allUser.length);
-
-  if (allUser.length < 9) {
-    userData.employeeId = "0" + (allUser.length + 1);
-  } else {
-    userData.employeeId = "" + (allUser.length + 1);
-  }
-
   const newUser = new User(userData);
   const user = await User.findOne({ email: req.body.email });
-
   // save user or send error
   if (!user) {
     try {
@@ -77,6 +67,17 @@ router.get("/:email", async (req, res) => {
   console.log(req.params.email);
   try {
     const user = await User.findOne({ email: req.params.email });
+    res.json(user);
+  } catch (err) {
+    res.json({ error: "user not found" });
+  }
+});
+router.post("/getUser", async (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  console.log(email);
+  try {
+    const user = await User.findOne({ email: email, password: password });
     res.json(user);
   } catch (err) {
     res.json({ error: "user not found" });

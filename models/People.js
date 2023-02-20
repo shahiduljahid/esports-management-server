@@ -7,6 +7,7 @@ const peopleSchema = mongoose.Schema(
     emailVerified: Boolean,
     photoUrl: String,
     provider: String,
+    password:String,
     uid: String,
    
   },
