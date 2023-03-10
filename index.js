@@ -53,7 +53,7 @@ app.use(express.json())
 app.use('/users', userRouter)
 app.use('/tournaments', tournamentRouter)
 app.use("/", (req, res) => {
-  res.json({ mess: "iam ALive" });
+  res.json({ mess: "iam still ALive" });
 });
 
 app.listen(port, () => {
