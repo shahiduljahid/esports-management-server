@@ -50,8 +50,8 @@ app.use(
 )
 app.use(express.json())
 //routing setup
-app.use('/api/users', userRouter)
-app.use('/api/tournaments', tournamentRouter)
+app.use('/users', userRouter)
+app.use('/tournaments', tournamentRouter)
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`)
