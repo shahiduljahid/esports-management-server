@@ -52,6 +52,9 @@ app.use(express.json())
 //routing setup
 app.use('/users', userRouter)
 app.use('/tournaments', tournamentRouter)
+app.use("/", (req, res) => {
+  res.json({ mess: "iam ALive" });
+});
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`)
